@@ -1,0 +1,111 @@
+$bg-navbar: #0d1117; // Match app dark theme
+$border-color: #2a3348;
+$accent: #ff2d78;
+
+.dashboard-navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba($bg-navbar, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-color;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__left, &__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.navbar-btn {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  outline: none;
+
+  &--back {
+    background: rgba(255, 255, 255, 0.02);
+    color: #e6edf3;
+    border: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #7d8590;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: #e6edf3;
+    border: 1px solid transparent;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, $accent 0%, #b3002d 100%);
+    color: white;
+    border: none;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba($accent, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Clerk UserButton Custom Styles
+.user-badge-trigger {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  border: 1px solid $border-color !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  color: #e6edf3 !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: #7d8590 !important;
+  }
+}
+
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid $border-color;
+}

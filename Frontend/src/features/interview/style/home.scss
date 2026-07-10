@@ -1,18 +1,27 @@
 // ── Variables ────────────────────────────────────────────────────────────────
-$bg-page:        #0d1117;
-$bg-card:        #161b22;
-$bg-panel:       #1c2230;
-$bg-input:       #1e2535;
-$border-color:   #2a3348;
-$text-primary:   #e6edf3;
-$text-muted:     #7d8590;
-$accent:         #ff2d78;
-$accent-alt:     #ff6b9d;
+$severity-high: #ff4d4d;
+$severity-medium: #f5a623;
+$severity-low: #3fb950;
+$bg-page: #0d1117;
+$bg-card: #161b22;
+$bg-panel: #1c2230;
+$bg-input: #1e2535;
+$border-color: #2a3348;
+$text-primary: #e6edf3;
+$text-muted: #7d8590;
+$accent: #ff2d78;
+$accent-alt: #ff6b9d;
 $badge-required: #ff2d78;
-$badge-best:     #ff2d78;
-$info-bg:        #1b2a4a;
-$info-border:    #2d4a7a;
-$font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$badge-best: #ff2d78;
+$info-bg: #1b2a4a;
+$info-border: #2d4a7a;
+$font-stack:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 
 // ── Page Shell ───────────────────────────────────────────────────────────────
 .home-page {
@@ -213,7 +222,9 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     border: 2px dashed $border-color;
     border-radius: 0.6rem;
     cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
+    transition:
+        border-color 0.2s,
+        background-color 0.2s;
 
     &:hover {
         border-color: $accent;
@@ -249,7 +260,7 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
 
     &::before,
     &::after {
-        content: '';
+        content: "";
         flex: 1;
         height: 1px;
         background-color: $border-color;
@@ -301,14 +312,16 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
+    background: linear-gradient(135deg, $accent 0%, #b3002d 100%);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 600;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
+    transition:
+        opacity 0.2s,
+        transform 0.1s;
     font-family: $font-stack;
 
     &:hover {
@@ -320,40 +333,190 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     }
 }
 
-.recent-reports{
+.recent-reports {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     width: 100%;
     max-width: 900px;
 
-    .reports-list{
+    h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $text-primary;
+    }
+
+    .reports-list {
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
 
-        .report-item{
+        .report-item {
             background-color: $bg-card;
             border: 1px solid $border-color;
             border-radius: 0.5rem;
             padding: 1rem;
             flex: 1;
+            min-width: 220px;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             cursor: pointer;
             flex-shrink: 0;
+            transition: border-color 0.2s;
+
+            &:hover {
+                border-color: #3d4f6e;
+            }
+
+            &__header {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 0.5rem;
+
+                h3 {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: $text-primary;
+                    flex: 1;
+                    margin: 0;
+                }
+            }
+
+            &__delete {
+                background: none;
+                border: none;
+                color: $text-muted;
+                cursor: pointer;
+                padding: 0.3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.25rem;
+                flex-shrink: 0;
+                opacity: 0.6;
+                transition:
+                    opacity 0.15s,
+                    color 0.15s,
+                    background-color 0.15s;
+
+                &:hover {
+                    opacity: 1;
+                    color: $severity-high;
+                    background-color: rgba($severity-high, 0.1);
+                }
+            }
+
+            &__spinner {
+                color: $text-muted;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.3rem;
+                flex-shrink: 0;
+            }
+
+            &--deleting {
+                opacity: 0.5;
+                pointer-events: none;
+                border-color: $border-color;
+            }
+
+            .report-meta {
+                font-size: 0.75rem;
+                color: $text-muted;
+                margin: 0;
+            }
 
             .match-score {
                 font-size: 0.8rem;
                 font-weight: 600;
                 color: $accent;
                 align-items: flex-start;
+                margin: 0;
+
+                &.score--high {
+                    color: $severity-low;
+                }
+                &.score--mid {
+                    color: $severity-medium;
+                }
+                &.score--low {
+                    color: $severity-high;
+                }
             }
         }
     }
 }
 
+// ── Error Banner ──────────────────────────────────────────────────────────────
+.error-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 900px;
+    padding: 0.7rem 1rem;
+    background-color: rgba($severity-high, 0.08);
+    border: 1px solid rgba($severity-high, 0.3);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: $severity-high;
+
+    span {
+        flex: 1;
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        color: $severity-high;
+        cursor: pointer;
+        font-size: 0.85rem;
+        padding: 0 0.2rem;
+        opacity: 0.7;
+        flex-shrink: 0;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+// ── Dropzone selected state ───────────────────────────────────────────────────
+.dropzone--selected {
+    border-color: $severity-low;
+    background-color: rgba($severity-low, 0.04);
+
+    &:hover {
+        border-color: $severity-low;
+        background-color: rgba($severity-low, 0.07);
+    }
+}
+
+.dropzone__icon--success {
+    color: $severity-low;
+    margin-bottom: 0.25rem;
+}
+
+.dropzone__title--success {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $severity-low;
+    margin: 0;
+    word-break: break-all;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+// ── Char counter warn state ───────────────────────────────────────────────────
+.char-counter {
+    &--warn {
+        color: $severity-high !important;
+        font-weight: 600;
+    }
+}
 
 // ── Page Footer ───────────────────────────────────────────────────────────────
 .page-footer {

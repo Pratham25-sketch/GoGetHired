@@ -1,60 +1,40 @@
-import React,{useState} from 'react'
-import { useNavigate, Link } from 'react-router'
-import { useAuth } from '../hooks/useAuth'
+import { SignUp } from "@clerk/react";
+import { dark } from "@clerk/themes";
+import "../auth.page.scss";
 
 const Register = () => {
+  return (
+    <main className="auth-page">
+      <div className="auth-page__container">
+        <SignUp
+          routing="path"
+          path="/sign-up"
+          signInUrl="/sign-in"
+          fallbackRedirectUrl="/dashboard"
+          appearance={{
+            baseTheme: dark,
+            elements: {
+              rootBox: "cl-rootBox",
+              card: "cl-card",
+              formButtonPrimary: "cl-formButtonPrimary",
+              footer: "cl-footer",
+              footerAction: "cl-footerAction",
+              footerActionText: "cl-footerActionText",
+              footerActionLink: "cl-footerActionLink",
+              headerTitle: "cl-headerTitle",
+              headerSubtitle: "cl-headerSubtitle",
+              formFieldLabel: "cl-formFieldLabel",
+              formFieldInput: "cl-formFieldInput",
+              socialButtonsBlockButtonText: "cl-socialButtonsBlockButtonText",
+              dividerText: "cl-dividerText",
+              providerIcon: "cl-providerIcon",
+              logoImage: "cl-logoImage",
+            },
+          }}
+        />
+      </div>
+    </main>
+  );
+};
 
-    const navigate = useNavigate()
-    const [ username, setUsername ] = useState("")
-    const [ email, setEmail ] = useState("")
-    const [ password, setPassword ] = useState("")
-
-    const {loading,handleRegister} = useAuth()
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
-    }
-
-    if(loading){
-        return (<main><h1>Loading.......</h1></main>)
-    }
-
-    return (
-        <main>
-            <div className="form-container">
-                <h1>Register</h1>
-
-                <form onSubmit={handleSubmit}>
-
-                    <div className="input-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            onChange={(e) => { setUsername(e.target.value) }}
-                            type="text" id="username" name='username' placeholder='Enter username' />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            onChange={(e) => { setEmail(e.target.value) }}
-                            type="email" id="email" name='email' placeholder='Enter email address' />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            onChange={(e) => { setPassword(e.target.value) }}
-                            type="password" id="password" name='password' placeholder='Enter password' />
-                    </div>
-
-                    <button className='button primary-button' >Register</button>
-
-                </form>
-
-                <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
-            </div>
-        </main>
-    )
-}
-
-export default Register
+export default Register;

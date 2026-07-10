@@ -7,7 +7,13 @@ $border-color: #2a3348;
 $text-primary: #e6edf3;
 $text-muted: #7d8590;
 $accent: #ff2d78;
-$font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-stack:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 
 // severity palette
 $severity-high: #ff4d4d;
@@ -26,21 +32,20 @@ $severity-low: #3fb950;
     color: $text-primary;
     font-family: $font-stack;
     display: flex;
-    align-items: stretch;
-    padding: 1.5rem;
-    box-sizing: border-box;
+    flex-direction: column;
 }
 
 // ── 3-Column Layout ───────────────────────────────────────────────────────────
 .interview-layout {
     display: flex;
-    width: 100%;
+    width: calc(100% - 3rem);
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 1.5rem auto;
     background-color: $bg-card;
     border: 1px solid $border-color;
     border-radius: 1rem;
     justify-content: space-between;
+    flex: 1;
 }
 
 .interview-divider {
@@ -58,9 +63,6 @@ $severity-low: #3fb950;
     flex-direction: column;
     justify-content: space-between;
     gap: 0.25rem;
-
-
-
 
     &__label {
         font-size: 0.7rem;
@@ -86,7 +88,9 @@ $severity-low: #3fb950;
         font-size: 0.875rem;
         cursor: pointer;
         text-align: left;
-        transition: background-color 0.15s, color 0.15s;
+        transition:
+            background-color 0.15s,
+            color 0.15s;
 
         &:hover {
             background-color: $bg-panel;
@@ -115,17 +119,9 @@ $severity-low: #3fb950;
     flex: 1;
     padding: 1.75rem 2rem;
     overflow-y: auto;
-    min-height: initial;
-    max-height: calc(100vh - 3rem);
+    max-height: calc(100vh - 8.5rem);
     padding-bottom: 5rem;
     align-items: flex-start;
-
-
-
-
-
-
-
 
     section {
         min-height: 100%;
@@ -172,7 +168,7 @@ $severity-low: #3fb950;
     transition: border-color 0.2s;
 
     &:hover {
-        border-color: lighten($border-color, 8%);
+        border-color: #3a4a60;
     }
 
     &__header {
@@ -234,7 +230,7 @@ $severity-low: #3fb950;
         p {
             margin: 0;
             font-size: 0.835rem;
-            color: lighten($text-muted, 15%);
+            color: #a0aab4;
             line-height: 1.6;
         }
     }
@@ -271,7 +267,7 @@ $severity-low: #3fb950;
 
     // vertical timeline line
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 28px;
         top: 0;
@@ -291,7 +287,7 @@ $severity-low: #3fb950;
 
     // dot on timeline
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 21px;
         top: 1.05rem;
@@ -338,7 +334,7 @@ $severity-low: #3fb950;
             align-items: flex-start;
             gap: 0.5rem;
             font-size: 0.845rem;
-            color: lighten($text-muted, 12%);
+            color: #98a3ad;
             line-height: 1.5;
         }
     }
@@ -475,5 +471,627 @@ $severity-low: #3fb950;
         color: $severity-low;
         background-color: rgba($severity-low, 0.1);
         border-color: rgba($severity-low, 0.25);
+    }
+}
+
+// ── Difficulty Badge ───────────────────────────────────────────────────────────
+.difficulty-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.45rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    flex-shrink: 0;
+
+    &--easy,
+    &--beginner {
+        color: $severity-low;
+        background-color: rgba($severity-low, 0.1);
+        border-color: rgba($severity-low, 0.25);
+    }
+
+    &--medium,
+    &--intermediate {
+        color: $severity-medium;
+        background-color: rgba($severity-medium, 0.1);
+        border-color: rgba($severity-medium, 0.25);
+    }
+
+    &--hard,
+    &--advanced {
+        color: $severity-high;
+        background-color: rgba($severity-high, 0.1);
+        border-color: rgba($severity-high, 0.25);
+    }
+
+    &--real-interview-scenario {
+        color: #a78bfa;
+        background-color: rgba(#a78bfa, 0.1);
+        border-color: rgba(#a78bfa, 0.25);
+    }
+}
+
+// ── Topic Group ───────────────────────────────────────────────────────────────
+.topic-group {
+    margin-bottom: 1.75rem;
+
+    &__title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0 0 0.25rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid $border-color;
+    }
+
+    &__count {
+        display: inline-block;
+        font-size: 0.72rem;
+        color: $text-muted;
+        margin-bottom: 0.75rem;
+    }
+}
+
+// ── Question card title row (difficulty + topic inline) ───────────────────────
+.q-card {
+    &__title-row {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+    }
+
+    &__topic {
+        font-size: 0.68rem;
+        color: $text-muted;
+        background-color: $bg-panel;
+        border: 1px solid $border-color;
+        padding: 0.1rem 0.45rem;
+        border-radius: 0.25rem;
+    }
+
+    &__tag--followup {
+        color: #60a5fa;
+        background-color: rgba(#60a5fa, 0.1);
+        border: 1px solid rgba(#60a5fa, 0.2);
+    }
+
+    &__followups {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
+        li {
+            font-size: 0.82rem;
+            color: #919ca6;
+            padding-left: 1rem;
+            position: relative;
+            line-height: 1.5;
+
+            &::before {
+                content: "›";
+                position: absolute;
+                left: 0;
+                color: #60a5fa;
+            }
+        }
+    }
+}
+
+.markdown-content {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #e6edf3;
+
+    p { margin-top: 0; margin-bottom: 0.75rem; }
+    p:last-child { margin-bottom: 0; }
+
+    strong { 
+        font-weight: normal; 
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-color: rgba(#fff, 0.4);
+        text-decoration-thickness: 1px;
+    }
+
+    ul, ol {
+        margin-top: 0.25rem;
+        margin-bottom: 0.75rem;
+        padding-left: 1.25rem;
+    }
+    
+    li {
+        margin-bottom: 0.25rem;
+    }
+}
+
+// ── Error Banners ─────────────────────────────────────────────────────────────
+.interview-error-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    background-color: rgba($severity-high, 0.1);
+    border: 1px solid rgba($severity-high, 0.3);
+    border-radius: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    color: $severity-high;
+
+    button {
+        background: none;
+        border: none;
+        color: $severity-high;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 0 0.25rem;
+        flex-shrink: 0;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+// ── Nav badge (e.g. ATS done checkmark) ──────────────────────────────────────
+.interview-nav__badge {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: $severity-low;
+    background-color: rgba($severity-low, 0.12);
+    border: 1px solid rgba($severity-low, 0.25);
+    padding: 0.05rem 0.35rem;
+    border-radius: 0.25rem;
+}
+
+// ── ATS Loading ───────────────────────────────────────────────────────────────
+.ats-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: $text-muted;
+
+    &__spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid $border-color;
+        border-top-color: $accent;
+        border-radius: 50%;
+        animation: ats-spin 0.8s linear infinite;
+    }
+
+    &__sub {
+        font-size: 0.8rem;
+        color: #5a6570;
+    }
+}
+
+@keyframes ats-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ── ATS Empty State ───────────────────────────────────────────────────────────
+.ats-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+
+    &__icon {
+        color: $accent;
+        opacity: 0.7;
+        margin-bottom: 0.25rem;
+    }
+
+    h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0;
+    }
+
+    p {
+        font-size: 0.875rem;
+        color: $text-muted;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    &__warn {
+        font-size: 0.8rem !important;
+        color: $severity-medium !important;
+        background-color: rgba($severity-medium, 0.08);
+        border: 1px solid rgba($severity-medium, 0.2);
+        border-radius: 0.4rem;
+        padding: 0.6rem 0.9rem;
+        text-align: left !important;
+    }
+}
+
+.ats-optimize-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background: linear-gradient(135deg, $accent 0%, #b3002d 100%);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 0.5rem;
+
+    &:hover {
+        opacity: 0.88;
+    }
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// ── ATS Results ───────────────────────────────────────────────────────────────
+.ats-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ats-scores-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    background-color: $bg-panel;
+    border: 1px solid $border-color;
+    border-radius: 0.75rem;
+}
+
+.ats-score-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    &__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: $text-muted;
+        margin: 0;
+    }
+}
+
+.ats-score-arrow {
+    font-size: 1.5rem;
+    color: $accent;
+    font-weight: 300;
+}
+
+.ats-score-ring {
+    border-radius: 50%;
+    border: 4px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__value {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: $text-primary;
+        line-height: 1;
+    }
+
+    &__label {
+        font-size: 0.65rem;
+        color: $text-muted;
+        margin-top: -2px;
+    }
+}
+
+// ── ATS Score Breakdown ───────────────────────────────────────────────────────
+.ats-breakdown {
+    background-color: $bg-panel;
+    border: 1px solid $border-color;
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+
+    &__title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $text-muted;
+        margin: 0 0 0.75rem;
+    }
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    &__bar-wrap {
+        height: 5px;
+        background-color: $border-color;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    &__bar {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.4s ease;
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    &__key {
+        font-size: 0.78rem;
+        color: $text-muted;
+    }
+
+    &__val {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: $text-primary;
+    }
+}
+
+// ── ATS Content Blocks ────────────────────────────────────────────────────────
+.ats-block {
+    background-color: $bg-panel;
+    border: 1px solid $border-color;
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: $text-muted;
+        margin: 0 0 0.75rem;
+    }
+}
+
+.ats-keywords {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ats-keyword-item {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+
+    &__tag {
+        font-weight: 600;
+        color: $accent;
+        background-color: rgba($accent, 0.1);
+        border: 1px solid rgba($accent, 0.25);
+        padding: 0.1rem 0.5rem;
+        border-radius: 0.3rem;
+        font-size: 0.75rem;
+    }
+
+    &__section {
+        color: $text-muted;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    &__reason {
+        color: #98a3ad;
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+}
+
+.ats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    li {
+        font-size: 0.835rem;
+        color: #98a3ad;
+        padding-left: 1.1rem;
+        position: relative;
+        line-height: 1.5;
+
+        &::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: $severity-low;
+            font-size: 0.7rem;
+            top: 2px;
+        }
+    }
+
+    &--tips li::before {
+        content: "→";
+        color: #60a5fa;
+    }
+}
+
+.ats-summary-preview {
+    font-size: 0.875rem;
+    color: $text-muted;
+    line-height: 1.65;
+    margin: 0 0 0.75rem;
+    font-style: italic;
+}
+
+.ats-skills-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.ats-skill-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #60a5fa;
+    background-color: rgba(#60a5fa, 0.08);
+    border: 1px solid rgba(#60a5fa, 0.2);
+    padding: 0.15rem 0.55rem;
+    border-radius: 0.3rem;
+
+    &--more {
+        color: $text-muted;
+        background-color: $bg-input;
+        border-color: $border-color;
+    }
+}
+
+// ── ATS Download Row ──────────────────────────────────────────────────────────
+.ats-download-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.ats-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, $severity-low 0%, #2d8a3e 100%);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.88;
+    }
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &--design-preserved {
+        background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+
+        &:hover {
+            opacity: 0.88;
+        }
+    }
+}
+
+.ats-rerun-btn {
+    padding: 0.7rem 1.25rem;
+    background: none;
+    border: 1px solid $border-color;
+    color: $text-muted;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition:
+        border-color 0.2s,
+        color 0.2s;
+
+    &:hover {
+        border-color: $accent;
+        color: $accent;
+    }
+}
+
+// ── Sidebar ATS Score Pills ───────────────────────────────────────────────────
+.sidebar-ats {
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    &__arrow {
+        color: $accent;
+        font-size: 0.9rem;
+    }
+
+    &__pill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 0.3rem 0.6rem;
+        border-radius: 0.4rem;
+        line-height: 1.1;
+
+        span {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        &--before {
+            color: $severity-medium;
+            background-color: rgba($severity-medium, 0.1);
+            border: 1px solid rgba($severity-medium, 0.2);
+        }
+
+        &--after {
+            color: $severity-low;
+            background-color: rgba($severity-low, 0.1);
+            border: 1px solid rgba($severity-low, 0.2);
+        }
     }
 }

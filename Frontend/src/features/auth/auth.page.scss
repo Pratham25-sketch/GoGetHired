@@ -1,0 +1,125 @@
+// ── Auth Page Variables ──────────────────────────────────────────────────────
+$bg-page: #0d1117;
+$bg-card: #161b22;
+$accent: #ff2d78;
+$accent-hover: #e1034d;
+$text-primary: #e6edf3;
+$text-muted: #7d8590;
+$border-color: #2a3348;
+
+// ── Auth Page Container ──────────────────────────────────────────────────────
+.auth-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: $bg-page;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle gradient overlay
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse at 30% 20%,
+      rgba($accent, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 70% 80%,
+      rgba(#800020, 0.05) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    // Animate the Clerk component in
+    animation: authFadeIn 0.4s ease-out;
+  }
+}
+
+// ── Clerk Component Overrides (scoped) ───────────────────────────────────────
+// These classes target Clerk's appearance API elements
+.cl-rootBox {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Force dark card */
+.cl-card {
+  background-color: $bg-card !important;
+  border: 1px solid $border-color !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Fix the footer overlapping/background issue */
+.cl-footer, .cl-footerAction, .cl-internal-phgxcj {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Fix text legibility on dark card */
+.cl-headerTitle, .cl-headerSubtitle, .cl-socialButtonsBlockButtonText, 
+.cl-dividerText, .cl-formFieldLabel, .cl-footerActionText, .cl-footerActionLink {
+  color: $text-primary !important;
+}
+
+/* Dark mode inputs */
+.cl-formFieldInput {
+  background-color: #1e2535 !important;
+  color: $text-primary !important;
+  border-color: $border-color !important;
+}
+
+/* Fix 'Secured by Clerk' branding text */
+.cl-providerIcon, .cl-logoImage {
+  filter: invert(1);
+}
+.cl-internal-1dauvpw {
+  display: none !important; // Hide development mode warning if causing border/overlap
+}
+
+.cl-formButtonPrimary {
+  background: linear-gradient(135deg, $accent 0%, #b3002d 100%) !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  transition: opacity 0.2s, transform 0.1s !important;
+
+  &:hover {
+    opacity: 0.9 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  &:active {
+    transform: translateY(0) !important;
+  }
+}
+
+// ── Animation ────────────────────────────────────────────────────────────────
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
